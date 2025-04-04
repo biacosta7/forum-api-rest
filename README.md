@@ -1,4 +1,4 @@
-# Fórum - API Restful
+# Fórum - API RESTful
 Uma API RESTful para um fórum de discussão dentro de um portal corporativo, criada para fins de estudo.
 
 ## Descrição
