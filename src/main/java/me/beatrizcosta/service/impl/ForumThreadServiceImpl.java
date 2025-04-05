@@ -1,34 +1,34 @@
 package me.beatrizcosta.service.impl;
 
 import me.beatrizcosta.domain.model.ForumThread;
-import me.beatrizcosta.domain.repository.ThreadRepository;
-import me.beatrizcosta.service.ThreadService;
+import me.beatrizcosta.domain.repository.ForumThreadRepository;
+import me.beatrizcosta.service.ForumThreadService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ThreadServiceImpl implements ThreadService {
+public class ForumThreadServiceImpl implements ForumThreadService {
 
-    private final ThreadRepository threadRepository;
+    private final ForumThreadRepository forumThreadRepository;
 
-    public ThreadServiceImpl(ThreadRepository threadRepository) {
-        this.threadRepository = threadRepository;
+    public ForumThreadServiceImpl(ForumThreadRepository forumThreadRepository) {
+        this.forumThreadRepository = forumThreadRepository;
     }
 
     @Override
     public ForumThread findById(Long id) {
-        return threadRepository.findById(id).orElse(null);
+        return forumThreadRepository.findById(id).orElse(null);
     }
 
     @Override
     public ForumThread create(ForumThread threadToCreate) {
-        return threadRepository.save(threadToCreate);
+        return forumThreadRepository.save(threadToCreate);
     }
 
     @Override
     public List<ForumThread> findAll() {
-        return threadRepository.findAll();
+        return forumThreadRepository.findAll();
     }
 
     @Override
@@ -39,11 +39,11 @@ public class ThreadServiceImpl implements ThreadService {
         threadFound.setTitle(threadToUpdate.getTitle());
         threadFound.setContent(threadToUpdate.getContent());
 
-        return threadRepository.save(threadFound);
+        return forumThreadRepository.save(threadFound);
     }
 
     @Override
     public void delete(Long id) {
-        threadRepository.deleteById(id);
+        forumThreadRepository.deleteById(id);
     }
 }

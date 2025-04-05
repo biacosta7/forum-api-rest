@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> findAllByThreadId(Long threadId) {
-        return commentRepository.findByThreadId(threadId);
+        return commentRepository.findByForumThreadId(threadId);
     }
 
     @Override

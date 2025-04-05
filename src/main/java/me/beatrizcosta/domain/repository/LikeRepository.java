@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LikeRepository extends JpaRepository<Like, Long> {
-    void deleteByUserIdAndThreadId(Long userId, Long threadId);
-    void deleteByUserIdAndCommentId(Long userId, Long commentId);
+    void deleteByUser_IdAndForumThread_Id(Long userId, Long threadId);
+
+    void deleteByUser_IdAndComment_Id(Long userId, Long commentId);
 }

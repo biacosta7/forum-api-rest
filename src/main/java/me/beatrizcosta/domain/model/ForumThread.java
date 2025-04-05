@@ -26,10 +26,10 @@ public class ForumThread {
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
-    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "forumThread", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "forumThread", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();
 
     public ForumThread() {}

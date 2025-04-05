@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ThreadRepository extends JpaRepository<ForumThread, Long> {
-    List<ForumThread> findByAuthorId(Long authorId);
+public interface ForumThreadRepository extends JpaRepository<ForumThread, Long> {
+    List<ForumThread> findByAuthor_Id(Long authorId);
 }

@@ -3,7 +3,7 @@ import me.beatrizcosta.domain.model.ForumThread;
 
 import java.util.List;
 
-public interface ThreadService {
+public interface ForumThreadService {
     ForumThread findById(Long id);
 
     ForumThread create(ForumThread forumThreadToCreate);
