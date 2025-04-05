@@ -1,4 +1,4 @@
-package me.beatrizcosta.model;
+package me.beatrizcosta.domain.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -6,14 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "comments")
-public class Comment {
+@Table(name = "threads")
+public class ForumThread {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 2000)
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false, length = 5000)
     private String content;
 
     @Column(nullable = false)
@@ -23,23 +26,25 @@ public class Comment {
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
-    @ManyToOne
-    @JoinColumn(name = "thread_id", nullable = false)
-    private Thread thread;
+    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();
 
-    public Comment() {}
+    public ForumThread() {}
 
-    public Comment(String content, User author, Thread thread) {
+    public ForumThread(String title, String content, User author) {
+        this.title = title;
         this.content = content;
         this.author = author;
-        this.thread = thread;
     }
 
     // Getters e Setters
     public Long getId() { return id; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
@@ -49,21 +54,15 @@ public class Comment {
     public User getAuthor() { return author; }
     public void setAuthor(User author) { this.author = author; }
 
-    public Thread getThread() { return thread; }
-    public void setThread(Thread thread) { this.thread = thread; }
-
+    public List<Comment> getComments() { return comments; }
     public List<Like> getLikes() { return likes; }
 
     public Long getAuthorId() {
-        return author != null ? author.getId() : null;
+        if (author != null) {
+            return author.getId();
+        } else {
+            return null;
+        }
     }
 
-    public Long getThreadId() {
-        return thread != null ? thread.getId() : null;
-    }
-
-    public void addLike(Like like) {
-        likes.add(like);
-        like.setComment(this);
-    }
 }

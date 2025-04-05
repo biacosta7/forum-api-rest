@@ -1,10 +1,12 @@
-package me.beatrizcosta.repository;
+package me.beatrizcosta.domain.repository;
 
-import me.beatrizcosta.model.User;
+import me.beatrizcosta.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-}
 
+    User create(User userToCreate);
+
+}

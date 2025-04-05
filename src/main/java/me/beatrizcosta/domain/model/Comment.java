@@ -1,4 +1,4 @@
-package me.beatrizcosta.model;
+package me.beatrizcosta.domain.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -6,17 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "threads")
-public class Thread {
+@Table(name = "comments")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false, length = 5000)
+    @Column(nullable = false, length = 2000)
     private String content;
 
     @Column(nullable = false)
@@ -26,25 +23,23 @@ public class Thread {
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
-    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "thread_id", nullable = false)
+    private ForumThread forumThread;
 
-    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();
 
-    public Thread() {}
+    public Comment() {}
 
-    public Thread(String title, String content, User author) {
-        this.title = title;
+    public Comment(String content, User author, ForumThread forumThread) {
         this.content = content;
         this.author = author;
+        this.forumThread = forumThread;
     }
 
     // Getters e Setters
     public Long getId() { return id; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
 
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
@@ -54,20 +49,25 @@ public class Thread {
     public User getAuthor() { return author; }
     public void setAuthor(User author) { this.author = author; }
 
-    public List<Comment> getComments() { return comments; }
+    public ForumThread getThread() { return forumThread; }
+    public void setThread(ForumThread forumThread) { this.forumThread = forumThread; }
+
     public List<Like> getLikes() { return likes; }
 
     public Long getAuthorId() {
-        return author != null ? author.getId() : null;
+        if (author != null) {
+            return author.getId();
+        } else {
+            return null;
+        }
     }
 
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        comment.setThread(this);
+    public Long getThreadId() {
+        if (forumThread != null) {
+            return forumThread.getId();
+        } else {
+            return null;
+        }
     }
 
-    public void addLike(Like like) {
-        likes.add(like);
-        like.setThread(this);
-    }
 }

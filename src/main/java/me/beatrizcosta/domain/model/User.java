@@ -1,4 +1,4 @@
-package me.beatrizcosta.model;
+package me.beatrizcosta.domain.model;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<Thread> threads = new ArrayList<>();
+    private List<ForumThread> forumThreads = new ArrayList<>();
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
@@ -50,7 +50,7 @@ public class User {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public List<Thread> getThreads() { return threads; }
+    public List<ForumThread> getThreads() { return forumThreads; }
     public List<Comment> getComments() { return comments; }
     public List<Like> getLikes() { return likes; }
 }

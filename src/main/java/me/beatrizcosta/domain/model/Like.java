@@ -1,4 +1,4 @@
-package me.beatrizcosta.model;
+package me.beatrizcosta.domain.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ public class Like {
 
     @ManyToOne
     @JoinColumn(name = "thread_id")
-    private Thread thread;
+    private ForumThread forumThread;
 
     @ManyToOne
     @JoinColumn(name = "comment_id")
@@ -28,9 +28,9 @@ public class Like {
 
     public Like() {}
 
-    public Like(User user, Thread thread) {
+    public Like(User user, ForumThread forumThread) {
         this.user = user;
-        this.thread = thread;
+        this.forumThread = forumThread;
     }
 
     public Like(User user, Comment comment) {
@@ -44,8 +44,8 @@ public class Like {
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
 
-    public Thread getThread() { return thread; }
-    public void setThread(Thread thread) { this.thread = thread; }
+    public ForumThread getThread() { return forumThread; }
+    public void setThread(ForumThread forumThread) { this.forumThread = forumThread; }
 
     public Comment getComment() { return comment; }
     public void setComment(Comment comment) { this.comment = comment; }
