@@ -1,1 +1,1 @@
-web: java -jar build/libs/forum-api-rest-0.0.1-SNAPSHOT.jar
+web: java -Dspring.profiles.active=prod -jar forum-api-rest-0.0.1-SNAPSHOT.jar
