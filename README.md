@@ -14,7 +14,6 @@ Esta API permite que usuários participem de discussões, criando tópicos, come
 - Java 21;
 - Spring Boot 3;
 - Spring Data JPA;
-- Spring Security;
 - Swagger/OpenAPI (para documentação);
 - Railway.
 
